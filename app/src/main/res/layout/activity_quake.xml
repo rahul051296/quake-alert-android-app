@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rahul0596.quakealert.QuakeActivity">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView"
+        android:divider="@null"
+        >
+
+    </ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        tools:text="No Network Connectvity. :-/"
+        android:id="@+id/empty_view"
+        android:textStyle="bold"
+        android:layout_marginTop="-15dp"
+        android:layout_below="@+id/empty_imageview"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="250dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_view_desc"
+        android:layout_below="@+id/empty_view"
+        android:layout_centerHorizontal="true"
+        android:textColor="#b3ffffff"
+        />
+    <ImageView
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:id="@+id/empty_imageview"
+        android:layout_centerInParent="true"
+        tools:src="@drawable/no_connection"
+        />
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbar"
+        android:layout_marginTop="-8dp"
+        android:layout_alignParentTop="true"
+        android:indeterminate="true"/>
+
+
+</RelativeLayout>
