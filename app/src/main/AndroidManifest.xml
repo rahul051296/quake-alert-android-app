@@ -47,6 +47,7 @@
                 android:value="com.rahul0596.quakealert.QuakeActivity" />
         </activity>
 
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAcTvHCEY7-_Q0dVUWvhJKOW1MSJcgwJeo" />
@@ -54,6 +55,12 @@
             android:name="com.google.android.gms.verson"
             android:value="@integer/google_play_services_version" />
 
+        <activity android:name=".MapsActivity"
+            android:parentActivityName=".QuakeActivity"
+            android:label="EarthQuake Map"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

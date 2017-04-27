@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -50,8 +52,6 @@ import java.util.Locale;
 
 public class QuakeActivity  extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Quake>> {
     ListView listView;
-    LoaderManager loaderManager;
-    //private static final String USGS_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=50&minmagnitude=2.5";
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?";
     TextView emptyView,emptyDesc;
     ImageView emptyImageView;
@@ -82,10 +82,19 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
             }
 
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QuakeActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void loading()
     {
-        loaderManager = getLoaderManager();
+        LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null,QuakeActivity.this);
     }
     @Override
