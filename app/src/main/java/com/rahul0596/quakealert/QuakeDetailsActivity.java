@@ -68,7 +68,14 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         dateView.setText(dateToDisplay);
         timeView.setText(timeToDisplay);
         depthView.setText(String.valueOf(dep) + " miles");
-        feltView.setText("Felt by " + f + " people");
+
+        if(f.equals("null") || f.equals("0"))
+         feltView.setText("No one reportedly felt it.");
+        else if(f.equals("1"))
+            feltView.setText(f +" person reportedly felt it.");
+        else
+            feltView.setText(f + " people reportedly felt it.");
+
         a = (int) mag;
 
         switch (a) {

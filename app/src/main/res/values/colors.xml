@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary Color -->
     <color name="colorPrimary">#37474F</color>
+
+    <!--Status Bar Color-->
     <color name="colorPrimaryDark">#263238</color>
+
+    <!--Accent Color-->
     <color name="colorAccent">#10CAC9</color>
+
+    <!--Window Background-->
     <color name="windowBackground">#f1f1f1</color>
+
+    <!--Windows Background Black -->
     <color name="black">#222222</color>
 
     <!-- Color for an earthquake with magnitude 0 and 2 -->

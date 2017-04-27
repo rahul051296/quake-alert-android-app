@@ -114,6 +114,27 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    public static class QuakeLoader extends AsyncTaskLoader<ArrayList<Quake>> {
+            String mUrl;
+
+        public QuakeLoader(Context context, String url) {
+            super(context);
+            mUrl = url;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            forceLoad();
+        }
+
+        @Override
+        public ArrayList<Quake> loadInBackground() {
+             return Utils.extractEarthquakes(mUrl);
+        }
+    }
+
     @Override
     public Loader<ArrayList<Quake>> onCreateLoader(int i, Bundle bundle) {
 
@@ -152,25 +173,6 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     public void onLoaderReset(Loader<ArrayList<Quake>> loader) {
     }
 
-
-    public static class QuakeLoader extends AsyncTaskLoader<ArrayList<Quake>> {
-            String mUrl;
-
-        public QuakeLoader(Context context, String url) {
-            super(context);
-            mUrl = url;
-        }
-
-        @Override
-        protected void onStartLoading() {
-            forceLoad();
-        }
-
-        @Override
-        public ArrayList<Quake> loadInBackground() {
-             return Utils.extractEarthquakes(mUrl);
-        }
-    }
 
     public boolean googleServicesAvailable() {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();

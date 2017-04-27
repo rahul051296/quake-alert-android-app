@@ -3,32 +3,30 @@
     <string name="near_the">Near the</string>
     <string name="AIzaSyC2jcJmCmrnNey_lo6Ye2mujV7WeCqHy8E">Map API</string>
     <string name="title_activity_maps">Map</string>
-    <string name="emptyText">No Earthquakes found</string>
-    <string name="emptyDesc">Please check your internet connectivity and try again</string>
+    <string name="emptyText">No Earthquakes found.</string>
+    <string name="emptyDesc">Please check your internet connectivity and try again.</string>
     <string name="noInternet">No Connection.</string>
     <string name="emptyview_desc">There were no earthquakes found at the moment.</string>
-    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <!-- Settings Menu Item -->
     <string name="settings_menu_item">Settings</string>
-    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <!-- Settings Activity Title -->
     <string name="settings_title">Settings</string>
-    <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30] -->
+    <!-- Strings For Minimum Magnitude Preference-->
     <string name="settings_min_magnitude_label">Minimum Magnitude</string>
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
     <string name="settings_min_magnitude_default" translatable="false">3</string>
 
-    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <!-- Strings For Order-By Preference -->
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
     <string name="settings_order_by_default" translatable="false">@string/settings_order_by_magnitude_value</string>
 
-    <!-- Label for order-by magnitude option [CHAR LIMIT=20] -->
+    <!-- Label for order-by magnitude option -->
     <string name="settings_order_by_magnitude_label">Magnitude</string>
     <string name="settings_order_by_magnitude_value" translatable="false">magnitude</string>
 
-    <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
+    <!-- Label for order-by most recent option-->
     <string name="settings_order_by_most_recent_label">Most Recent</string>
     <string name="settings_order_by_most_recent_value" translatable="false">time</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+
 </resources>

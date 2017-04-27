@@ -20,17 +20,17 @@ public class Quake {
 
     private double depth;
 
-    public Quake(double mag, String loc, String t, String d, String u, String f, double lati, double longi, double dep)
+    public Quake(double lMagnitude, String lLocation, String lTime, String lDate, String lUrl, String lFelt, double lLatitude, double lLongitude, double lDepth)
     {
-        magnitude = mag;
-        location = loc;
-        time = t;
-        date = d;
-        url = u;
-        felt = f;
-        latitude = lati;
-        longitude = longi;
-        depth = dep;
+        magnitude = lMagnitude;
+        location = lLocation;
+        time = lTime;
+        date = lDate;
+        url = lUrl;
+        felt = lFelt;
+        latitude = lLatitude;
+        longitude = lLongitude;
+        depth = lDepth;
     }
 
     public double getMagnitude() { return magnitude;}
