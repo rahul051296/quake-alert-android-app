@@ -56,6 +56,8 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     TextView emptyView,emptyDesc;
     ImageView emptyImageView;
     ProgressBar progressBar;
+    SwipeRefreshLayout mySwipeRefreshLayout;
+    LoaderManager loaderManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +67,26 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         emptyView = (TextView) findViewById(R.id.empty_view);
         emptyDesc = (TextView) findViewById(R.id.empty_view_desc);
         emptyImageView = (ImageView) findViewById(R.id.empty_imageview);
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         listView.setEmptyView(emptyView);
         listView.setEmptyView(emptyImageView);
         listView.setEmptyView(emptyDesc);
+        loaderManager = getLoaderManager();
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        loaderManager.restartLoader(0, null,QuakeActivity.this);
+                    }
+                }
+        );
+
+
         if (googleServicesAvailable()) {
             ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
-                loading();
+                loaderManager.initLoader(0, null,QuakeActivity.this);
             }
             else{
                 progressBar.setVisibility(View.GONE);
@@ -92,11 +106,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
             }
         });
     }
-    public void loading()
-    {
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(0, null,QuakeActivity.this);
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -163,6 +173,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         emptyImageView.setImageResource(R.drawable.happy_earth);
         if (earthquakes != null && !earthquakes.isEmpty()) {
             updateUi(earthquakes);
+            mySwipeRefreshLayout.setRefreshing(false);
             emptyImageView.setVisibility(View.GONE);
             emptyView.setVisibility(View.GONE);
         }
