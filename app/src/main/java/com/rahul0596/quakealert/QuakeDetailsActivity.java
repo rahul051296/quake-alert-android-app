@@ -159,7 +159,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
 
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Quake Alert!!");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                startActivity(Intent.createChooser(sharingIntent, "Share"));
                 return true;
 
             default:
