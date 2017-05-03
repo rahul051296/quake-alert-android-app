@@ -37,16 +37,17 @@
             android:name=".QuakeDetailsActivity"
             android:label="Details"
             android:parentActivityName=".QuakeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/MyTheme" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_menu_item"
-            android:theme="@style/SettingsTheme">
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahul0596.quakealert.QuakeActivity" />
         </activity>
-
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -55,12 +56,15 @@
             android:name="com.google.android.gms.verson"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MapsActivity"
-            android:parentActivityName=".QuakeActivity"
+        <activity
+            android:name=".MapsActivity"
             android:label="EarthQuake Map"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:parentActivityName=".QuakeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".About"
+            android:label="About"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".QuakeActivity" />
     </application>
 
 </manifest>

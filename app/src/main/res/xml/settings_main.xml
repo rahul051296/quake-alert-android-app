@@ -9,6 +9,12 @@
         android:entryValues="@array/settings_order_by_values"
         android:key="@string/settings_order_by_key"
         android:title="@string/settings_order_by_label" />
+    <ListPreference
+        android:defaultValue="@string/settings_location_default"
+        android:entries="@array/settings_location_by_labels"
+        android:entryValues="@array/settings_location_by_values"
+        android:key="@string/settings_location_key"
+        android:title="@string/settings_location_label" />
 
     <EditTextPreference
         android:defaultValue="@string/settings_min_magnitude_default"
@@ -16,5 +22,6 @@
         android:key="@string/settings_min_magnitude_key"
         android:selectAllOnFocus="true"
         android:title="@string/settings_min_magnitude_label" />
+
 
 </PreferenceScreen>

@@ -15,8 +15,8 @@ android {
         applicationId "com.rahul0596.quakealert"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 202
-        versionName '2.0.2'
+        versionCode 212
+        versionName '2.1.2'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

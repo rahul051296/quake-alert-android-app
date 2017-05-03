@@ -9,6 +9,7 @@
     <string name="emptyview_desc">There were no earthquakes found at the moment.</string>
     <!-- Settings Menu Item -->
     <string name="settings_menu_item">Settings</string>
+    <string name="about_menu_item">About</string>
     <!-- Settings Activity Title -->
     <string name="settings_title">Settings</string>
     <!-- Strings For Minimum Magnitude Preference-->
@@ -19,7 +20,12 @@
     <!-- Strings For Order-By Preference -->
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
-    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_magnitude_value</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_most_recent_value</string>
+
+    <!-- Strings For Location Preference -->
+    <string name="settings_location_label">Location</string>
+    <string name="settings_location_key" translatable="false">location</string>
+    <string name="settings_location_default" translatable="false">@string/settings_order_by_location_world_value</string>
 
     <!-- Label for order-by magnitude option -->
     <string name="settings_order_by_magnitude_label">Magnitude</string>
@@ -29,4 +35,28 @@
     <string name="settings_order_by_most_recent_label">Most Recent</string>
     <string name="settings_order_by_most_recent_value" translatable="false">time</string>
 
+    <!-- Label for order-by location option -->
+    <string name="settings_order_by_location_asia_label">Asia</string>
+    <string name="settings_order_by_location_asia_value" translatable="false">asia</string>
+
+    <string name="settings_order_by_location_world_label">All</string>
+    <string name="settings_order_by_location_world_value" translatable="false">all</string>
+
+    <string name="settings_order_by_location_africa_label">Africa</string>
+    <string name="settings_order_by_location_africa_value" translatable="false">africa</string>
+
+    <string name="settings_order_by_location_australia_label">Australia</string>
+    <string name="settings_order_by_location_australia_value" translatable="false">australia</string>
+
+    <string name="settings_order_by_location_europe_label">Europe</string>
+    <string name="settings_order_by_location_europe_value" translatable="false">europe</string>
+
+    <string name="settings_order_by_location_south_america_label">South America</string>
+    <string name="settings_order_by_location_south_america_value" translatable="false">south_america</string>
+
+    <string name="settings_order_by_location_north_america_label">North America</string>
+    <string name="settings_order_by_location_north_america_value" translatable="false">north_america</string>
+
+    <string name="dev"><u>Developed by Rahul Prabhakar</u></string>
+    <string name="graphics"><u>Graphics by Mervin Monfort</u></string>
 </resources>

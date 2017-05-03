@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,14 +9,6 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:windowBackground">@color/black</item>
 
-    </style>
-
-    <style name="SettingsTheme" parent="Theme.AppCompat.DialogWhenLarge">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/black</item>
     </style>
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.DarkActionBar">

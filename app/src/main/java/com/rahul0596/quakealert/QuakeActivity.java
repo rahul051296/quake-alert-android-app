@@ -58,6 +58,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     ProgressBar progressBar;
     SwipeRefreshLayout mySwipeRefreshLayout;
     LoaderManager loaderManager;
+    String myLat,myLon,myRadius;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +122,11 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
             startActivity(settingsIntent);
             return true;
         }
+        if(id == R.id.action_about) {
+            Intent aboutIntent = new Intent(this,About.class);
+            startActivity(aboutIntent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -155,6 +161,48 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
+        String location = sharedPrefs.getString(
+                getString(R.string.settings_location_key),
+                getString(R.string.settings_location_default));
+        Log.i("location",location);
+        switch (location)
+        {
+            case "all":
+                myLat="0";
+                myLon="0";
+                myRadius = "180";
+                break;
+            case "asia":
+                myLat="34.047863";
+                myLon="100.619655";
+                myRadius = "40";
+                break;
+            case "australia":
+                myLat="-25.274398";
+                myLon="133.77513599999997";
+                myRadius = "19";
+                break;
+            case "africa":
+                myLat="-8.783195";
+                myLon="34.50852299999997";
+                myRadius = "30";
+                break;
+            case "europe":
+                myLat="54.525961";
+                myLon="15.255119";
+                myRadius = "30";
+                break;
+            case "north_america":
+                myLat="54.525961";
+                myLon="-105.255119";
+                myRadius = "55";
+                break;
+            case "south_america":
+                myLat="-35.675147";
+                myLon="-71.54296899999997";
+                myRadius = "40";
+                break;
+        }
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
@@ -162,6 +210,9 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         uriBuilder.appendQueryParameter("limit", "30");
         uriBuilder.appendQueryParameter("minmagnitude", minMagnitude);
         uriBuilder.appendQueryParameter("orderby",orderBy);
+        uriBuilder.appendQueryParameter("latitude",myLat);
+        uriBuilder.appendQueryParameter("longitude",myLon);
+        uriBuilder.appendQueryParameter("maxradius",myRadius);
         Log.i("URL",uriBuilder.toString());
         return new QuakeLoader(this, uriBuilder.toString());
     }
@@ -170,10 +221,10 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     public void onLoadFinished(Loader<ArrayList<Quake>> loader,ArrayList<Quake> earthquakes) {
         emptyView.setText(R.string.emptyText);
         emptyDesc.setText(R.string.emptyview_desc);
+        mySwipeRefreshLayout.setRefreshing(false);
         emptyImageView.setImageResource(R.drawable.happy_earth);
         if (earthquakes != null && !earthquakes.isEmpty()) {
             updateUi(earthquakes);
-            mySwipeRefreshLayout.setRefreshing(false);
             emptyImageView.setVisibility(View.GONE);
             emptyView.setVisibility(View.GONE);
         }

@@ -1,10 +1,13 @@
 package com.rahul0596.quakealert;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -12,8 +15,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,9 +30,10 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
     private static final String LOCATION_SEPARATOR = " - ";
     GoogleMap mGoogleMap;
     int a;
+    double mag,dep;
     Double latitude, longitude;
     TextView textView, magView, locView, dateView, effectView, messageView, timeView, feltView, depthView;
-    String primaryLoc, LocOff, message, effect;
+    String primaryLoc, LocOff, message, effect, title, dt,f, dateToDisplay,timeToDisplay;
     SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
     SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.ENGLISH);
     Date dateObject;
@@ -46,11 +53,11 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         messageView = (TextView) findViewById(R.id.message);
 
         Bundle bundle = getIntent().getExtras();
-        String title = bundle.getString("title");
-        double mag = bundle.getDouble("mag");
-        double dep = bundle.getDouble("depth");
-        String dt = bundle.getString("date");
-        String f = bundle.getString("felt");
+        title = bundle.getString("title");
+        mag = bundle.getDouble("mag");
+        dep = bundle.getDouble("depth");
+        dt = bundle.getString("date");
+        f = bundle.getString("felt");
         latitude = bundle.getDouble("latitude");
         longitude = bundle.getDouble("longitude");
         String[] parts = title.split(LOCATION_SEPARATOR);
@@ -59,8 +66,8 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
 
         long tim = Long.parseLong(dt);
         dateObject = new Date(tim);
-        String dateToDisplay = dateFormat.format(dateObject);
-        String timeToDisplay = timeFormat.format(dateObject);
+        dateToDisplay = dateFormat.format(dateObject);
+        timeToDisplay = timeFormat.format(dateObject);
 
         textView.setText(primaryLoc);
         magView.setText(String.valueOf(mag));
@@ -79,6 +86,9 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         a = (int) mag;
 
         switch (a) {
+            case 0:
+                message = "Can be detected only by Seismograph";
+                effect = "Instrumental";
             case 1:
                 message = "Can be detected only by Seismograph";
                 effect = "Instrumental";
@@ -124,7 +134,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
                 message = "You wouldn't be alive to read this.";
                 break;
         }
-        effectView.setText("Ritcher Level - " + effect);
+        effectView.setText("Richter Level - " + effect);
         messageView.setText(message);
 
         GradientDrawable magnitudeCircle = (GradientDrawable) magView.getBackground();
@@ -132,6 +142,31 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         int magnitudeColor = quakeAdapter.getMagnitudeColor(mag);
         magnitudeCircle.setColor(magnitudeColor);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.share:
+
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBodyText = "An earthquake of magnitude "+mag+ " has been recorded in the region "+ primaryLoc +" on "+dateToDisplay+" at "+timeToDisplay+"\n\nGet instant updates about earthquakes on Quake Alert!! (https://goo.gl/Mhjcya)";
+
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Quake Alert!!");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void initmap() {
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);

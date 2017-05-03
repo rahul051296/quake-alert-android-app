@@ -9,4 +9,24 @@
         <item>@string/settings_order_by_magnitude_value</item>
         <item>@string/settings_order_by_most_recent_value</item>
     </string-array>
+
+    <string-array name="settings_location_by_labels">
+        <item>@string/settings_order_by_location_world_label</item>
+        <item>@string/settings_order_by_location_africa_label</item>
+        <item>@string/settings_order_by_location_asia_label</item>
+        <item>@string/settings_order_by_location_australia_label</item>
+        <item>@string/settings_order_by_location_europe_label</item>
+        <item>@string/settings_order_by_location_north_america_label</item>
+        <item>@string/settings_order_by_location_south_america_label</item>
+    </string-array>
+    <string-array name="settings_location_by_values">
+        <item>@string/settings_order_by_location_world_value</item>
+        <item>@string/settings_order_by_location_africa_value</item>
+        <item>@string/settings_order_by_location_asia_value</item>
+        <item>@string/settings_order_by_location_australia_value</item>
+        <item>@string/settings_order_by_location_europe_value</item>
+        <item>@string/settings_order_by_location_north_america_value</item>
+        <item>@string/settings_order_by_location_south_america_value</item>
+    </string-array>
+
 </resources>

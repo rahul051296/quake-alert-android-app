@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rahul0596.quakealert.About">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quake Alert!! v2.1.2"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/title"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:text="Data provided by the USGS"
+        android:textColor="#b3ffffff"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="20dp"
+        android:padding="24dp"
+        android:textAlignment="center"
+        android:textColor="#b3ffffff"
+        android:text="Quake Alert provides you with all the information that you'll need to know about the earthquakes that are recorded around the globe. If you find this app useful, please do rate it and send us your feedback."
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/thanks"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="#b3ffffff"
+        android:textSize="15sp"
+        android:onClick="mervin"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/graphics"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dev"
+        android:layout_above="@id/thanks"
+        android:textColor="#b3ffffff"
+        android:textSize="16sp"
+        android:onClick="rahul"
+        android:textAlignment="center"
+        android:text="@string/dev"/>
+
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:text="Rate Us"
+        android:onClick="rateUs"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:onClick="feedback"
+        android:layout_centerHorizontal="true"
+        android:text="Send Feedback" />
+
+</RelativeLayout>
