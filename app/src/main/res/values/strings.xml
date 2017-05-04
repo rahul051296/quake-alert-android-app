@@ -12,6 +12,13 @@
     <string name="about_menu_item">About</string>
     <!-- Settings Activity Title -->
     <string name="settings_title">Settings</string>
+
+    <!--Settings Themes -->
+
+    <string name="settings_themes_label">Themes</string>
+    <string name="settings_themes_key" translatable="false">themes</string>
+    <string name="settings_themes_default" translatable="false">@string/settings_themes_dark_value</string>
+
     <!-- Strings For Minimum Magnitude Preference-->
     <string name="settings_min_magnitude_label">Minimum Magnitude</string>
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
@@ -26,6 +33,12 @@
     <string name="settings_location_label">Location</string>
     <string name="settings_location_key" translatable="false">location</string>
     <string name="settings_location_default" translatable="false">@string/settings_order_by_location_world_value</string>
+
+    <string name="settings_themes_dark_label">Dark</string>
+    <string name="settings_themes_dark_value">dark</string>
+
+    <string name="settings_themes_light_label">Light</string>
+    <string name="settings_themes_light_value">light</string>
 
     <!-- Label for order-by magnitude option -->
     <string name="settings_order_by_magnitude_label">Magnitude</string>

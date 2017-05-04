@@ -28,5 +28,12 @@
         <item>@string/settings_order_by_location_north_america_value</item>
         <item>@string/settings_order_by_location_south_america_value</item>
     </string-array>
-
+    <string-array name="settings_themes_by_labels">
+        <item>@string/settings_themes_dark_label</item>
+        <item>@string/settings_themes_light_label</item>
+    </string-array>
+    <string-array name="settings_themes_by_values">
+        <item>@string/settings_themes_dark_value</item>
+        <item>@string/settings_themes_light_value</item>
+    </string-array>
 </resources>

@@ -2,12 +2,15 @@ package com.rahul0596.quakealert;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -37,11 +40,40 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
     SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
     SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.ENGLISH);
     Date dateObject;
+    ImageView cal,clock,location,flash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String themes = sharedPrefs.getString(
+                getString(R.string.settings_themes_key),
+                getString(R.string.settings_themes_default));
+        switch (themes)
+        {
+            case "dark" : setTheme(R.style.MyTheme);
+                break;
+            case "light" : setTheme(R.style.MyTheme_Light);
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quake_details);
         initmap();
+        cal = (ImageView) findViewById(R.id.event);
+        clock = (ImageView) findViewById(R.id.clock);
+        location = (ImageView) findViewById(R.id.location_pin);
+        flash = (ImageView) findViewById(R.id.flash);
+        switch (themes)
+        {
+            case "light" :
+                cal.setImageResource(R.drawable.ic_event_black_24dp);
+                cal.setAlpha((float) 0.6);
+                clock.setImageResource(R.drawable.ic_access_time_black_24dp);
+                clock.setAlpha((float) 0.6);
+                location.setImageResource(R.drawable.ic_location_on_black_24dp);
+                location.setAlpha((float) 0.6);
+                flash.setImageResource(R.drawable.ic_flash_on_black_24dp);
+                flash.setAlpha((float)0.6);
+                break;
+        }
         textView = (TextView) findViewById(R.id.details);
         timeView = (TextView) findViewById(R.id.time);
         magView = (TextView) findViewById(R.id.magnitude);

@@ -8,9 +8,21 @@
 
     <!--Accent Color-->
     <color name="colorAccent">#10CAC9</color>
+    <color name="colorAccentInverse">#FC6644</color>
+
+    <color name="textColor">#ffffff</color>
+
+    <color name="textColorSecondary">#b3ffffff</color>
+
+    <color name="textColorInverse">#de000000</color>
+
+    <color name="textColorSecondaryInverse">#8a000000</color>
+
+    <color name="dividerColor">#1e000000</color>
 
     <!--Window Background-->
-    <color name="windowBackground">#f1f1f1</color>
+
+    <color name="windowBackground">#ffffff</color>
 
     <!--Windows Background Black -->
     <color name="black">#222222</color>

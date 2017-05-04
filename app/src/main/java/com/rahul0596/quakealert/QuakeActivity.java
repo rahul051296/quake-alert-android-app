@@ -61,8 +61,22 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     String myLat,myLon,myRadius;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String themes = sharedPrefs.getString(
+                getString(R.string.settings_themes_key),
+                getString(R.string.settings_themes_default));
+            switch (themes)
+            {
+                case "dark" : setTheme(R.style.AppTheme);
+
+                    break;
+                case "light" : setTheme(R.style.AppTheme_Light);
+                    break;
+            }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quake);
+
         listView = (ListView) findViewById(R.id.listView);
         progressBar = (ProgressBar) findViewById(R.id.pbar);
         emptyView = (TextView) findViewById(R.id.empty_view);
@@ -106,6 +120,13 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
     }
 
     @Override

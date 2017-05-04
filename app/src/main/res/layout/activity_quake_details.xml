@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/textColor"
         android:layout_weight="2"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -57,6 +58,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="fill"
                     android:text="Richter Scale"
+                    android:textColor="@color/textColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -64,6 +66,7 @@
                     android:id="@+id/felt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
                     tools:text="Felt by Few People" />
             </LinearLayout>
 
@@ -110,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="RichterLevel - Strong"
+                    android:textColor="@color/textColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -117,6 +121,7 @@
                     android:id="@+id/message"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
                     tools:text="Trees sway, some damage from overturning and falling objects"
                     android:textSize="12dp" />
 
@@ -132,6 +137,7 @@
             android:layout_weight="0"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
+            android:background="?android:windowBackground"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -151,6 +157,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:id="@+id/event"
                         android:src="@drawable/ic_event_white_24dp" />
 
                     <LinearLayout
@@ -186,6 +193,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:id="@+id/clock"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_access_time_white_24dp" />
 
@@ -230,13 +238,13 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:id="@+id/location_pin"
                         android:src="@drawable/ic_location_on_white_24dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-
                         android:orientation="vertical">
 
                         <TextView
@@ -271,6 +279,7 @@
                         android:layout_height="24dp"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
+                        android:id="@+id/flash"
                         android:src="@drawable/ic_flash_on_white_24dp" />
 
                     <LinearLayout
@@ -283,7 +292,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Depth"
-                            android:textColor="#fff"
                             android:textStyle="bold" />
 
                         <TextView
@@ -291,7 +299,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="10.2 miles"
-                            android:textColor="#fff"
+
                             android:textSize="12sp" />
 
 

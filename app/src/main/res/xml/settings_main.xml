@@ -22,6 +22,11 @@
         android:key="@string/settings_min_magnitude_key"
         android:selectAllOnFocus="true"
         android:title="@string/settings_min_magnitude_label" />
-
+    <ListPreference
+        android:defaultValue="@string/settings_themes_default"
+        android:entries="@array/settings_themes_by_labels"
+        android:entryValues="@array/settings_themes_by_values"
+        android:key="@string/settings_themes_key"
+        android:title="@string/settings_themes_label" />
 
 </PreferenceScreen>
