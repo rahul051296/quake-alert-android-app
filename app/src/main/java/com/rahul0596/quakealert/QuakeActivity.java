@@ -10,12 +10,8 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,26 +25,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class QuakeActivity  extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Quake>> {
     ListView listView;
@@ -59,6 +38,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     SwipeRefreshLayout mySwipeRefreshLayout;
     LoaderManager loaderManager;
     String myLat,myLon,myRadius;
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,6 +56,19 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
             }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quake);
+        dialog = new Dialog(this);
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun",true);
+
+        if(isFirstRun){
+
+            dialog.setContentView(R.layout.instruction_dialog);
+
+            dialog.show();
+
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun",false).apply();
+        }
 
         listView = (ListView) findViewById(R.id.listView);
         progressBar = (ProgressBar) findViewById(R.id.pbar);
@@ -122,11 +115,10 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         });
     }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
 
+    public void dismiss(View view)
+    {
+        dialog.dismiss();
     }
 
     @Override

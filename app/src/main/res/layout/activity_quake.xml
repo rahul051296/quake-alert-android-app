@@ -41,7 +41,7 @@
         android:id="@+id/empty_view_desc"
         android:layout_below="@+id/empty_view"
         android:layout_centerHorizontal="true"
-        android:textColor="#b3ffffff"
+        android:textColor="?android:textColorSecondary"
         />
     <ImageView
         android:layout_width="256dp"

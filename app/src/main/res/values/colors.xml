@@ -12,11 +12,11 @@
 
     <color name="textColor">#ffffff</color>
 
-    <color name="textColorSecondary">#b3ffffff</color>
+    <color name="textColorSecondary">#ffffff</color>
 
-    <color name="textColorInverse">#de000000</color>
+    <color name="textColorInverse">#707070</color>
 
-    <color name="textColorSecondaryInverse">#8a000000</color>
+    <color name="textColorSecondaryInverse">#737372</color>
 
     <color name="dividerColor">#1e000000</color>
 

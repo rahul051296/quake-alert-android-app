@@ -66,7 +66,7 @@
                     android:id="@+id/felt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/textColorSecondary"
                     tools:text="Felt by Few People" />
             </LinearLayout>
 
@@ -121,7 +121,7 @@
                     android:id="@+id/message"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/textColorSecondary"
                     tools:text="Trees sway, some damage from overturning and falling objects"
                     android:textSize="12dp" />
 
