@@ -24,8 +24,13 @@
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
     <string name="settings_min_magnitude_default" translatable="false">3</string>
 
-    <!-- Strings For Order-By Preference -->
-    <string name="settings_order_by_label">Order By</string>
+    <!-- Strings For Limit Preference-->
+    <string name="settings_limit_label">Events Limit</string>
+    <string name="settings_limit_key" translatable="false">limit</string>
+    <string name="settings_limit_default" translatable="false">30</string>
+
+    <!-- Strings For Sort-By Preference -->
+    <string name="settings_order_by_label">Sort By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
     <string name="settings_order_by_default" translatable="false">@string/settings_order_by_most_recent_value</string>
 

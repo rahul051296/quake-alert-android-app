@@ -2,7 +2,9 @@ package com.rahul0596.quakealert;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -13,9 +15,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.floor;
+
 
 public class QuakeAdapter extends ArrayAdapter<Quake> {
     private static final String LOCATION_SEPARATOR = " of ";
+    private static final String METRIC_MAG = "km";
+
 
     public QuakeAdapter(Context context, ArrayList<Quake> quakes) {
         super(context, 0, quakes);
@@ -24,10 +30,8 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
     @Nullable
     @Override
     public View getView(int position, @Nullable View convertView, ViewGroup parent) {
-
         View listItemView = convertView;
         listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_view, parent, false);
-
         Quake currentQuake = getItem(position);
         TextView magText = (TextView) listItemView.findViewById(R.id.magnitude);
         magText.setText(String.valueOf(currentQuake.getMagnitude()));
@@ -41,6 +45,7 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         String originalLocation = currentQuake.getLocation();
         String primaryLocation;
         String locationOffset;
+
 
         if (originalLocation.contains(LOCATION_SEPARATOR)) {
 
@@ -75,7 +80,7 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
     public int getMagnitudeColor(double magnitude) {
         int magnitudeColorResourceId;
-        int magnitudeFloor = (int) Math.floor(magnitude);
+        int magnitudeFloor = (int) floor(magnitude);
         switch (magnitudeFloor) {
             case 0:
             case 1:

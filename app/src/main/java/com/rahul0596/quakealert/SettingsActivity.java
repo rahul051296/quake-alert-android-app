@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.EditText;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -62,6 +65,9 @@ public class SettingsActivity extends AppCompatActivity {
             Preference themes = findPreference(getString(R.string.settings_themes_key));
             bindPreferenceSummaryToValue(themes);
 
+            Preference limit = findPreference(getString(R.string.settings_limit_key));
+            bindPreferenceSummaryToValue(limit);
+
 
         }
 
@@ -78,7 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
             String stringValue = value.toString();
 
             if (preference instanceof ListPreference) {
-                ListPreference listPreference = (ListPreference) preference;
+                ListPreference listPreference = (ListPreference)  preference;
                 int prefIndex = listPreference.findIndexOfValue(stringValue);
                 if (prefIndex >= 0) {
                     CharSequence[] labels = listPreference.getEntries();

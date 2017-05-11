@@ -3,6 +3,7 @@ package com.rahul0596.quakealert;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -56,65 +57,7 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
 
     @Override
     public Loader<ArrayList<Quake>> onCreateLoader(int i, Bundle bundle) {
-
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String minMagnitude = sharedPrefs.getString(
-                getString(R.string.settings_min_magnitude_key),
-                getString(R.string.settings_min_magnitude_default));
-        String orderBy = sharedPrefs.getString(
-                getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default));
-        String location = sharedPrefs.getString(
-                getString(R.string.settings_location_key),
-                getString(R.string.settings_location_default));
-        switch (location)
-        {    case "all":
-            myLat="0";
-            myLon="0";
-            myRadius = "180";
-            break;
-            case "asia":
-                myLat="34.047863";
-                myLon="100.619655";
-                myRadius = "40";
-                break;
-            case "australia":
-                myLat="-25.274398";
-                myLon="133.77513599999997";
-                myRadius = "19";
-                break;
-            case "africa":
-                myLat="-8.783195";
-                myLon="34.50852299999997";
-                myRadius = "30";
-                break;
-            case "europe":
-                myLat="54.525961";
-                myLon="15.255119";
-                myRadius = "30";
-                break;
-            case "north_america":
-                myLat="54.525961";
-                myLon="-105.255119";
-                myRadius = "55";
-                break;
-            case "south_america":
-                myLat="-35.675147";
-                myLon="-71.54296899999997";
-                myRadius = "55";
-                break;
-        }
-        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
-        Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("format", "geojson");
-        uriBuilder.appendQueryParameter("limit", "30");
-        uriBuilder.appendQueryParameter("minmagnitude", minMagnitude);
-        uriBuilder.appendQueryParameter("orderby",orderBy);
-        uriBuilder.appendQueryParameter("latitude",myLat);
-        uriBuilder.appendQueryParameter("longitude",myLon);
-        uriBuilder.appendQueryParameter("maxradius",myRadius);
-        Log.i("URL",uriBuilder.toString());
-        return new QuakeActivity.QuakeLoader(this, uriBuilder.toString());
+        return new QuakeActivity.QuakeLoader(this, QuakeActivity.uri_string);
     }
 
     @Override
@@ -127,44 +70,23 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
     public void onLoaderReset(Loader<ArrayList<Quake>> loader) {
     }
 
-
-
-    public static class QuakeLoader extends AsyncTaskLoader<ArrayList<Quake>> {
-        String mUrl;
-
-        public QuakeLoader(Context context, String url) {
-            super(context);
-            mUrl = url;
-        }
-
-        @Override
-        protected void onStartLoading() {
-            forceLoad();
-        }
-
-        @Override
-        public ArrayList<Quake> loadInBackground() {
-            return Utils.extractEarthquakes(mUrl);
-        }
-    }
-
-    public void updateUi(ArrayList<Quake> quakeArrayList)
+    public void updateUi(final ArrayList<Quake> quakeArrayList)
     {
         Log.i("ArrayList",String.valueOf(quakeArrayList.size()));
         for(int i = 0 ; i < quakeArrayList.size() ; i++ ) {
 
-            createMarker(quakeArrayList.get(i).getLatitude(), quakeArrayList.get(i).getLongitude(), quakeArrayList.get(i).getMagnitude(), quakeArrayList.get(i).getLocation(), quakeArrayList.get(i).getDate());
+            createMarker(quakeArrayList.get(i).getLatitude(), quakeArrayList.get(i).getLongitude(), quakeArrayList.get(i).getMagnitude(), quakeArrayList.get(i).getLocation());
         }
 
     }
-    protected Marker createMarker(double latitude, double longitude, double magnitude, String location, String date) {
-
+    protected Marker createMarker(final double latitude, final double longitude, final double magnitude, String location) {
         Marker marker =  mGoogleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(longitude, latitude))
                 .snippet(location)
                 .title("Magnitude - "+String.valueOf(magnitude))
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                 ));
+
         return marker;
     }
 }

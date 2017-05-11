@@ -90,7 +90,8 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         String[] parts = title.split(LOCATION_SEPARATOR);
         LocOff = parts[0];
         primaryLoc = parts[1];
-
+        dep = dep*1.60934;
+        double depth = Math.round(dep * 100.0) / 100.0;;
         long tim = Long.parseLong(dt);
         dateObject = new Date(tim);
         dateToDisplay = dateFormat.format(dateObject);
@@ -101,8 +102,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         locView.setText(String.valueOf(longitude) + " , " + String.valueOf(latitude));
         dateView.setText(dateToDisplay);
         timeView.setText(timeToDisplay);
-        depthView.setText(String.valueOf(dep) + " miles");
-
+        depthView.setText(String.valueOf(depth) + " km");
         if(f.equals("null") || f.equals("0"))
          feltView.setText("No one reportedly felt it.");
         else if(f.equals("1"))

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "823281290581",
+    "firebase_url": "https://quake-alert-165606.firebaseio.com",
+    "project_id": "quake-alert-165606",
+    "storage_bucket": "quake-alert-165606.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823281290581:android:75e7bdeb344cdc21",
+        "android_client_info": {
+          "package_name": "com.rahul0596.quakealert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823281290581-ou5f0gn4lfm2bpgo966qf8otfbrm50jt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnITuum7bLCvjM0hbcSwfwO4Wvf4vbgQA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

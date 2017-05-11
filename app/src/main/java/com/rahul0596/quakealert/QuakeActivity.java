@@ -39,6 +39,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     LoaderManager loaderManager;
     String myLat,myLon,myRadius;
     Dialog dialog;
+    public static String uri_string;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -177,7 +178,9 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         String location = sharedPrefs.getString(
                 getString(R.string.settings_location_key),
                 getString(R.string.settings_location_default));
-        Log.i("location",location);
+        String limit = sharedPrefs.getString(
+                getString(R.string.settings_limit_key),
+                getString(R.string.settings_limit_default));
         switch (location)
         {
             case "all":
@@ -226,7 +229,9 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         uriBuilder.appendQueryParameter("latitude",myLat);
         uriBuilder.appendQueryParameter("longitude",myLon);
         uriBuilder.appendQueryParameter("maxradius",myRadius);
+        uriBuilder.appendQueryParameter("limit",limit);
         Log.i("URL",uriBuilder.toString());
+        uri_string = uriBuilder.toString();
         return new QuakeLoader(this, uriBuilder.toString());
     }
 
