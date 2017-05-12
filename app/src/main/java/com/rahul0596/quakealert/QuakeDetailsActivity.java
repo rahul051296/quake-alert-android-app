@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import java.text.SimpleDateFormat;
@@ -96,10 +98,10 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         dateObject = new Date(tim);
         dateToDisplay = dateFormat.format(dateObject);
         timeToDisplay = timeFormat.format(dateObject);
-
+        String latLng = convert(latitude,longitude);
         textView.setText(primaryLoc);
         magView.setText(String.valueOf(mag));
-        locView.setText(String.valueOf(longitude) + " , " + String.valueOf(latitude));
+        locView.setText(latLng);
         dateView.setText(dateToDisplay);
         timeView.setText(timeToDisplay);
         depthView.setText(String.valueOf(depth) + " km");
@@ -167,7 +169,11 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         GradientDrawable magnitudeCircle = (GradientDrawable) magView.getBackground();
         QuakeAdapter quakeAdapter = new QuakeAdapter(this,null);
         int magnitudeColor = quakeAdapter.getMagnitudeColor(mag);
+        int magnitudeStroke = quakeAdapter.getMagnitudeStrokeColor(mag);
         magnitudeCircle.setColor(magnitudeColor);
+        magnitudeCircle.setStroke(8, magnitudeStroke);
+
+
     }
 
     @Override
@@ -207,14 +213,54 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         mGoogleMap.addCircle(new CircleOptions()
                 .center(new LatLng(longitude, latitude))
                 .radius(40000)
-                .strokeColor(Color.argb(00, 100, 100, 125))
+                .strokeColor(Color.argb(30, 255, 0, 0))
+                .clickable(true)
                 .fillColor(Color.argb(100, 255, 0, 0)));
+
     }
 
     private void goToLocation(double lon, double lat, int zoom) {
         LatLng lg = new LatLng(lon, lat);
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(lg, zoom);
         mGoogleMap.animateCamera(update);
+    }
+
+    private String convert(double latitude, double longitude) {
+        StringBuilder builder = new StringBuilder();
+
+
+
+        String latitudeDegrees = Location.convert(Math.abs(latitude), Location.FORMAT_SECONDS);
+        String[] latitudeSplit = latitudeDegrees.split(":");
+        builder.append(latitudeSplit[0]);
+        builder.append("°");
+        builder.append(latitudeSplit[1]);
+        builder.append("'");
+        builder.append(latitudeSplit[2]);
+        builder.append("\"");
+        if (latitude < 0) {
+            builder.append(" S");
+        } else {
+            builder.append(" N");
+        }
+        builder.append("\n");
+
+
+
+        String longitudeDegrees = Location.convert(Math.abs(longitude), Location.FORMAT_SECONDS);
+        String[] longitudeSplit = longitudeDegrees.split(":");
+        builder.append(longitudeSplit[0]);
+        builder.append("°");
+        builder.append(longitudeSplit[1]);
+        builder.append("'");
+        builder.append(longitudeSplit[2]);
+        builder.append("\"");
+        if (longitude < 0) {
+            builder.append(" W");
+        } else {
+            builder.append(" E");
+        }
+        return builder.toString();
     }
 
 }

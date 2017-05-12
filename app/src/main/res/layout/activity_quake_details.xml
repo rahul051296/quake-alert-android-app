@@ -11,7 +11,8 @@
 <android.support.v7.widget.Toolbar
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary">
+    android:padding="8dp"
+    android:background="?colorPrimary">
     <TextView
         android:id="@+id/details"
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:background="@color/colorPrimaryDark"
+            android:background="?colorPrimaryDark"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:paddingRight="16dp"
@@ -39,7 +40,7 @@
                 android:id="@+id/magnitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/magnitude_circle"
+                android:background="@drawable/mag_circle"
                 android:gravity="center"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="#fff"
@@ -74,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_earthquake_24dp" />
+                android:src="@drawable/ic_white_launcher" />
         </LinearLayout>
 
         <fragment
@@ -88,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:background="@color/colorPrimaryDark"
+            android:background="?colorPrimaryDark"
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
@@ -178,7 +179,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             tools:text="12.02.2017"
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -214,7 +215,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="12.02.2017"
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
 
 
                     </LinearLayout>
@@ -260,7 +261,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="India"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                     </LinearLayout>
 
@@ -300,7 +301,7 @@
                             android:layout_height="wrap_content"
                             tools:text="10.2 miles"
 
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
 
 
                     </LinearLayout>

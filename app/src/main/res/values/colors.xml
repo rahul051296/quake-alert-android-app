@@ -2,13 +2,15 @@
 <resources>
     <!-- Primary Color -->
     <color name="colorPrimary">#37474F</color>
+    <color name="colorPrimaryInverse">#00ACC1</color>
 
     <!--Status Bar Color-->
     <color name="colorPrimaryDark">#263238</color>
+    <color name="colorPrimaryDarkInverse">#00838F</color>
 
     <!--Accent Color-->
-    <color name="colorAccent">#10CAC9</color>
-    <color name="colorAccentInverse">#FC6644</color>
+    <color name="colorAccent">#ef5350</color>
+    <color name="colorAccentInverse">#ef5350</color>
 
     <color name="textColor">#ffffff</color>
 
@@ -28,33 +30,43 @@
     <color name="black">#222222</color>
 
     <!-- Color for an earthquake with magnitude 0 and 2 -->
-    <color name="magnitude1">#4A7BA7</color>
+    <color name="magnitude1">#04b465</color>
+    <color name="magnitude1s">#039e58</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 2 and 3 -->
-    <color name="magnitude2">#04B4B3</color>
+    <color name="magnitude2">#4aa766</color>
+    <color name="magnitude2s">#3e8c56</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 3 and 4 -->
-    <color name="magnitude3">#10CAC9</color>
+    <color name="magnitude3">#10ca76</color>
+    <color name="magnitude3s">#0dae65</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 4 and 5 -->
     <color name="magnitude4">#F5A623</color>
+    <color name="magnitude4s">#de9620</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 5 and 6 -->
     <color name="magnitude5">#FF7D50</color>
+    <color name="magnitude5s">#df6e46</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 6 and 7 -->
     <color name="magnitude6">#FC6644</color>
+    <color name="magnitude6s">#e15a3b</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 7 and 8 -->
     <color name="magnitude7">#E75F40</color>
+    <color name="magnitude7s">#ce5438</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 8 and 9 -->
     <color name="magnitude8">#E13A20</color>
+    <color name="magnitude8s">#c7331c</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 9 and 10 -->
     <color name="magnitude9">#D93218</color>
+    <color name="magnitude9s">#be2b14</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude over 10 -->
     <color name="magnitude10plus">#C03823</color>
+    <color name="magnitude10pluss">#a6301d</color>
 
 </resources>

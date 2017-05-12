@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/magnitude"
             android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:background="@drawable/magnitude_circle"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
@@ -31,13 +31,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/location"
                 android:textSize="12sp"
-                android:textAllCaps="true"
+                android:fontFamily="sans-serif-smallcaps"
+
                 tools:text= "Chennai"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:id="@+id/location_main"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="14sp"
                 tools:text= "Chennai"/>
@@ -49,6 +52,7 @@
             android:layout_weight="1"
             android:id="@+id/date"
             android:textSize="12sp"
+            android:fontFamily="sans-serif-condensed"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:layout_gravity="fill"

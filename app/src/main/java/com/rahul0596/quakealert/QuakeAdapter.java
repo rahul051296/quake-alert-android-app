@@ -3,6 +3,7 @@ package com.rahul0596.quakealert;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -39,7 +40,9 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
         GradientDrawable magnitudeCircle = (GradientDrawable) magText.getBackground();
         int magnitudeColor = getMagnitudeColor(currentQuake.getMagnitude());
+        int magnitudeStroke = getMagnitudeStrokeColor(currentQuake.getMagnitude());
         magnitudeCircle.setColor(magnitudeColor);
+        magnitudeCircle.setStroke(8, magnitudeStroke);
 
 
         String originalLocation = currentQuake.getLocation();
@@ -112,6 +115,46 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
                 break;
             default:
                 magnitudeColorResourceId = R.color.magnitude10plus;
+                break;
+        }
+
+        return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
+    }
+
+        public int getMagnitudeStrokeColor(double magnitude) {
+        int magnitudeColorResourceId;
+        int magnitudeFloor = (int) floor(magnitude);
+        switch (magnitudeFloor) {
+            case 0:
+            case 1:
+                magnitudeColorResourceId = R.color.magnitude1s;
+                break;
+            case 2:
+                magnitudeColorResourceId = R.color.magnitude2s;
+                break;
+            case 3:
+                magnitudeColorResourceId = R.color.magnitude3s;
+                break;
+            case 4:
+                magnitudeColorResourceId = R.color.magnitude4s;
+                break;
+            case 5:
+                magnitudeColorResourceId = R.color.magnitude5s;
+                break;
+            case 6:
+                magnitudeColorResourceId = R.color.magnitude6s;
+                break;
+            case 7:
+                magnitudeColorResourceId = R.color.magnitude7s;
+                break;
+            case 8:
+                magnitudeColorResourceId = R.color.magnitude8s;
+                break;
+            case 9:
+                magnitudeColorResourceId = R.color.magnitude9s;
+                break;
+            default:
+                magnitudeColorResourceId = R.color.magnitude10pluss;
                 break;
         }
 

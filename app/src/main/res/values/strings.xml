@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quake Alert!!</string>
+    <string name="app_name">Quake Alert</string>
     <string name="near_the">Near the</string>
     <string name="AIzaSyC2jcJmCmrnNey_lo6Ye2mujV7WeCqHy8E">Map API</string>
     <string name="title_activity_maps">Map</string>
