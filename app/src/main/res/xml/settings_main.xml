@@ -1,12 +1,9 @@
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/settings_title"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:divider="@drawable/lines"
+    android:title="@string/settings_title"
 
     >
-<PreferenceCategory
-    android:title="Filter Options"
-    />
+    <PreferenceCategory android:title="Filter Options" />
     <ListPreference
         android:defaultValue="@string/settings_order_by_default"
         android:entries="@array/settings_order_by_labels"
@@ -24,24 +21,31 @@
         android:defaultValue="@string/settings_min_magnitude_default"
         android:inputType="numberDecimal"
         android:key="@string/settings_min_magnitude_key"
-        android:selectAllOnFocus="true"
         android:maxLength="1"
+        android:selectAllOnFocus="true"
         android:title="@string/settings_min_magnitude_label" />
 
     <EditTextPreference
         android:defaultValue="@string/settings_limit_default"
         android:inputType="numberDecimal"
         android:key="@string/settings_limit_key"
-        android:selectAllOnFocus="true"
         android:maxLength="4"
+        android:selectAllOnFocus="true"
         android:title="@string/settings_limit_label" />
-    <PreferenceCategory
-        android:title="Customisation"/>
+    <PreferenceCategory android:title="Customisation" />
     <ListPreference
         android:defaultValue="@string/settings_themes_default"
         android:entries="@array/settings_themes_by_labels"
         android:entryValues="@array/settings_themes_by_values"
         android:key="@string/settings_themes_key"
         android:title="@string/settings_themes_label" />
+
+    <PreferenceCategory android:title="Others" />
+    <ListPreference
+        android:defaultValue="@string/settings_distance_default"
+        android:entries="@array/settings_distance_by_labels"
+        android:entryValues="@array/settings_distance_by_values"
+        android:key="@string/settings_distance_key"
+        android:title="@string/settings_distance_label" />
 
 </PreferenceScreen>

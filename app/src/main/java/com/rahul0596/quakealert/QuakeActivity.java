@@ -10,11 +10,11 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,21 +25,24 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
 import java.util.ArrayList;
 
-public class QuakeActivity  extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Quake>> {
+public class QuakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Quake>> {
     ListView listView;
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?";
-    TextView emptyView,emptyDesc;
+    TextView emptyView, emptyDesc;
     ImageView emptyImageView;
     ProgressBar progressBar;
     SwipeRefreshLayout mySwipeRefreshLayout;
     LoaderManager loaderManager;
-    String myLat,myLon,myRadius;
+    String myLat, myLon, myRadius;
     Dialog dialog;
     public static String uri_string;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,28 +50,29 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         String themes = sharedPrefs.getString(
                 getString(R.string.settings_themes_key),
                 getString(R.string.settings_themes_default));
-            switch (themes)
-            {
-                case "dark" : setTheme(R.style.AppTheme);
+        switch (themes) {
+            case "dark":
+                setTheme(R.style.AppTheme);
 
-                    break;
-                case "light" : setTheme(R.style.AppTheme_Light);
-                    break;
-            }
+                break;
+            case "light":
+                setTheme(R.style.AppTheme_Light);
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quake);
         dialog = new Dialog(this);
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getBoolean("isFirstRun",true);
+                .getBoolean("isFirstRun", true);
 
-        if(isFirstRun){
+        if (isFirstRun) {
 
             dialog.setContentView(R.layout.instruction_dialog);
 
             dialog.show();
 
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putBoolean("isFirstRun",false).apply();
+                    .putBoolean("isFirstRun", false).apply();
         }
 
         listView = (ListView) findViewById(R.id.listView);
@@ -85,7 +89,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        loaderManager.restartLoader(0, null,QuakeActivity.this);
+                        loaderManager.restartLoader(0, null, QuakeActivity.this);
                     }
                 }
         );
@@ -95,9 +99,8 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
             ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
-                loaderManager.initLoader(0, null,QuakeActivity.this);
-            }
-            else{
+                loaderManager.initLoader(0, null, QuakeActivity.this);
+            } else {
                 progressBar.setVisibility(View.GONE);
                 emptyView.setText(R.string.noInternet);
                 emptyDesc.setText(R.string.emptyDesc);
@@ -117,8 +120,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     }
 
 
-    public void dismiss(View view)
-    {
+    public void dismiss(View view) {
         dialog.dismiss();
     }
 
@@ -136,8 +138,8 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
             startActivity(settingsIntent);
             return true;
         }
-        if(id == R.id.action_about) {
-            Intent aboutIntent = new Intent(this,About.class);
+        if (id == R.id.action_about) {
+            Intent aboutIntent = new Intent(this, About.class);
             startActivity(aboutIntent);
             return true;
         }
@@ -145,9 +147,8 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
     }
 
 
-
     public static class QuakeLoader extends AsyncTaskLoader<ArrayList<Quake>> {
-            String mUrl;
+        String mUrl;
 
         public QuakeLoader(Context context, String url) {
             super(context);
@@ -161,7 +162,7 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
 
         @Override
         public ArrayList<Quake> loadInBackground() {
-             return Utils.extractEarthquakes(mUrl);
+            return Utils.extractEarthquakes(mUrl);
         }
     }
 
@@ -181,41 +182,40 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         String limit = sharedPrefs.getString(
                 getString(R.string.settings_limit_key),
                 getString(R.string.settings_limit_default));
-        switch (location)
-        {
+        switch (location) {
             case "all":
-                myLat="0";
-                myLon="0";
+                myLat = "0";
+                myLon = "0";
                 myRadius = "180";
                 break;
             case "asia":
-                myLat="34.047863";
-                myLon="100.619655";
+                myLat = "34.047863";
+                myLon = "100.619655";
                 myRadius = "40";
                 break;
             case "australia":
-                myLat="-25.274398";
-                myLon="133.77513599999997";
+                myLat = "-25.274398";
+                myLon = "133.77513599999997";
                 myRadius = "19";
                 break;
             case "africa":
-                myLat="-8.783195";
-                myLon="34.50852299999997";
+                myLat = "-8.783195";
+                myLon = "34.50852299999997";
                 myRadius = "30";
                 break;
             case "europe":
-                myLat="54.525961";
-                myLon="15.255119";
+                myLat = "54.525961";
+                myLon = "15.255119";
                 myRadius = "30";
                 break;
             case "north_america":
-                myLat="54.525961";
-                myLon="-105.255119";
+                myLat = "54.525961";
+                myLon = "-105.255119";
                 myRadius = "55";
                 break;
             case "south_america":
-                myLat="-35.675147";
-                myLon="-71.54296899999997";
+                myLat = "-35.675147";
+                myLon = "-71.54296899999997";
                 myRadius = "40";
                 break;
         }
@@ -225,18 +225,18 @@ public class QuakeActivity  extends AppCompatActivity implements LoaderManager.L
         uriBuilder.appendQueryParameter("format", "geojson");
         uriBuilder.appendQueryParameter("limit", "30");
         uriBuilder.appendQueryParameter("minmagnitude", minMagnitude);
-        uriBuilder.appendQueryParameter("orderby",orderBy);
-        uriBuilder.appendQueryParameter("latitude",myLat);
-        uriBuilder.appendQueryParameter("longitude",myLon);
-        uriBuilder.appendQueryParameter("maxradius",myRadius);
-        uriBuilder.appendQueryParameter("limit",limit);
-        Log.i("URL",uriBuilder.toString());
+        uriBuilder.appendQueryParameter("orderby", orderBy);
+        uriBuilder.appendQueryParameter("latitude", myLat);
+        uriBuilder.appendQueryParameter("longitude", myLon);
+        uriBuilder.appendQueryParameter("maxradius", myRadius);
+        uriBuilder.appendQueryParameter("limit", limit);
+        Log.i("URL", uriBuilder.toString());
         uri_string = uriBuilder.toString();
         return new QuakeLoader(this, uriBuilder.toString());
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Quake>> loader,ArrayList<Quake> earthquakes) {
+    public void onLoadFinished(Loader<ArrayList<Quake>> loader, ArrayList<Quake> earthquakes) {
         emptyView.setText(R.string.emptyText);
         emptyDesc.setText(R.string.emptyview_desc);
         mySwipeRefreshLayout.setRefreshing(false);

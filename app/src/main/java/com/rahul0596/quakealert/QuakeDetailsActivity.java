@@ -6,21 +6,22 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.location.Location;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -28,27 +29,33 @@ import java.util.Locale;
 
 public class QuakeDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String LOCATION_SEPARATOR = " - ";
+    private static final String METRIC_MAG = "km";
+
     GoogleMap mGoogleMap;
     int a;
-    double mag,dep;
+    double mag, dep;
     Double latitude, longitude;
+    double distCon, distConvert;
     TextView textView, magView, locView, dateView, effectView, messageView, timeView, feltView, depthView;
-    String primaryLoc, LocOff, message, effect, title, dt,f, dateToDisplay,timeToDisplay;
+    String primaryLoc, LocOff, message, effect, title, dt, f, dateToDisplay, timeToDisplay;
+    String kmPart, dirPart;
     SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH);
     SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.ENGLISH);
     Date dateObject;
-    ImageView cal,clock,location,flash;
+    ImageView cal, clock, location, flash;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String themes = sharedPrefs.getString(
                 getString(R.string.settings_themes_key),
                 getString(R.string.settings_themes_default));
-        switch (themes)
-        {
-            case "dark" : setTheme(R.style.MyTheme);
+        switch (themes) {
+            case "dark":
+                setTheme(R.style.MyTheme);
                 break;
-            case "light" : setTheme(R.style.MyTheme_Light);
+            case "light":
+                setTheme(R.style.MyTheme_Light);
                 break;
         }
         super.onCreate(savedInstanceState);
@@ -58,9 +65,8 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         clock = (ImageView) findViewById(R.id.clock);
         location = (ImageView) findViewById(R.id.location_pin);
         flash = (ImageView) findViewById(R.id.flash);
-        switch (themes)
-        {
-            case "light" :
+        switch (themes) {
+            case "light":
                 cal.setImageResource(R.drawable.ic_event_black_24dp);
                 cal.setAlpha((float) 0.6);
                 clock.setImageResource(R.drawable.ic_access_time_black_24dp);
@@ -68,7 +74,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
                 location.setImageResource(R.drawable.ic_location_on_black_24dp);
                 location.setAlpha((float) 0.6);
                 flash.setImageResource(R.drawable.ic_flash_on_black_24dp);
-                flash.setAlpha((float)0.6);
+                flash.setAlpha((float) 0.6);
                 break;
         }
         textView = (TextView) findViewById(R.id.details);
@@ -92,23 +98,48 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         String[] parts = title.split(LOCATION_SEPARATOR);
         LocOff = parts[0];
         primaryLoc = parts[1];
-        dep = dep*1.60934;
-        double depth = Math.round(dep * 100.0) / 100.0;;
+
+        String distUnits = sharedPrefs.getString(
+                getString(R.string.settings_distance_key),
+                getString(R.string.settings_distance_default));
+        switch (distUnits) {
+            case "kilometers":
+                dep = dep * 1.60934;
+                double depth = Math.round(dep * 100.0) / 100.0;
+                depthView.setText(String.valueOf(depth) + " KM");
+                primaryLoc = parts[1];
+                break;
+            case "miles":
+                depthView.setText(String.valueOf(dep) + " MI");
+                if (primaryLoc.contains(METRIC_MAG)) {
+
+                    String[] units = primaryLoc.split(METRIC_MAG);
+                    kmPart = units[0];
+                    dirPart = units[1];
+                    distCon = Double.parseDouble(kmPart);
+                    distCon = distCon * 0.621371;
+                    int distConver = (int) distCon;
+                    kmPart = String.valueOf(distConver);
+                    primaryLoc = kmPart + "MI" + dirPart;
+                }
+                break;
+        }
+
         long tim = Long.parseLong(dt);
         dateObject = new Date(tim);
         dateToDisplay = dateFormat.format(dateObject);
         timeToDisplay = timeFormat.format(dateObject);
-        String latLng = convert(latitude,longitude);
+        String latLng = convert(latitude, longitude);
         textView.setText(primaryLoc);
         magView.setText(String.valueOf(mag));
         locView.setText(latLng);
         dateView.setText(dateToDisplay);
         timeView.setText(timeToDisplay);
-        depthView.setText(String.valueOf(depth) + " km");
-        if(f.equals("null") || f.equals("0"))
-         feltView.setText("No one reportedly felt it.");
-        else if(f.equals("1"))
-            feltView.setText(f +" person reportedly felt it.");
+
+        if (f.equals("null") || f.equals("0"))
+            feltView.setText("No one reportedly felt it.");
+        else if (f.equals("1"))
+            feltView.setText(f + " person reportedly felt it.");
         else
             feltView.setText(f + " people reportedly felt it.");
 
@@ -167,7 +198,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         messageView.setText(message);
 
         GradientDrawable magnitudeCircle = (GradientDrawable) magView.getBackground();
-        QuakeAdapter quakeAdapter = new QuakeAdapter(this,null);
+        QuakeAdapter quakeAdapter = new QuakeAdapter(this, null);
         int magnitudeColor = quakeAdapter.getMagnitudeColor(mag);
         int magnitudeStroke = quakeAdapter.getMagnitudeStrokeColor(mag);
         magnitudeCircle.setColor(magnitudeColor);
@@ -181,6 +212,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         getMenuInflater().inflate(R.menu.share_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -188,9 +220,9 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
 
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBodyText = "An earthquake of magnitude "+mag+ " has been recorded in the region "+ primaryLoc +" on "+dateToDisplay+" at "+timeToDisplay+"\n\nGet instant updates about earthquakes on Quake Alert!! (https://goo.gl/Mhjcya)";
+                String shareBodyText = "An earthquake of magnitude " + mag + " has been recorded in the region " + primaryLoc + " on " + dateToDisplay + " at " + timeToDisplay + "\n\nGet instant updates about earthquakes on Quake Alert!! (https://goo.gl/Mhjcya)";
 
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Quake Alert!!");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Quake Alert!!");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Share"));
                 return true;
@@ -229,7 +261,6 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
         StringBuilder builder = new StringBuilder();
 
 
-
         String latitudeDegrees = Location.convert(Math.abs(latitude), Location.FORMAT_SECONDS);
         String[] latitudeSplit = latitudeDegrees.split(":");
         builder.append(latitudeSplit[0]);
@@ -244,7 +275,6 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
             builder.append(" N");
         }
         builder.append("\n");
-
 
 
         String longitudeDegrees = Location.convert(Math.abs(longitude), Location.FORMAT_SECONDS);

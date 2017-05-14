@@ -3,11 +3,11 @@ package com.rahul0596.quakealert;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +22,11 @@ import static java.lang.Math.floor;
 public class QuakeAdapter extends ArrayAdapter<Quake> {
     private static final String LOCATION_SEPARATOR = " of ";
     private static final String METRIC_MAG = "km";
-
+    String depth;
+    double depthCon, depthRound, distConvert;
 
     public QuakeAdapter(Context context, ArrayList<Quake> quakes) {
+
         super(context, 0, quakes);
     }
 
@@ -48,15 +50,42 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         String originalLocation = currentQuake.getLocation();
         String primaryLocation;
         String locationOffset;
-
+        String distanceOffset, directionOffset;
+        double distCon;
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String du = sharedPrefs.getString("distance_units", "kilometers");
+        Log.i("DU", du);
 
         if (originalLocation.contains(LOCATION_SEPARATOR)) {
 
             String[] parts = originalLocation.split(LOCATION_SEPARATOR);
+            locationOffset = parts[0];
+            switch (du) {
+                case "kilometers":
+                    locationOffset = parts[0] + LOCATION_SEPARATOR;
+                    break;
 
-            locationOffset = parts[0] + LOCATION_SEPARATOR;
+                case "miles":
+                    if (locationOffset.contains(METRIC_MAG)) {
+
+                        String[] units = locationOffset.split(METRIC_MAG);
+                        distanceOffset = units[0];
+                        directionOffset = units[1];
+                        distCon = Double.parseDouble(distanceOffset);
+                        distCon = distCon * 0.621371;
+                        int distConver = (int) distCon;
+                        distanceOffset = String.valueOf(distConver);
+                        locationOffset = distanceOffset + "MI" + directionOffset + LOCATION_SEPARATOR;
+                    } else {
+                        locationOffset = parts[0] + LOCATION_SEPARATOR;
+                    }
+                    break;
+            }
+
 
             primaryLocation = parts[1];
+
+
         } else {
 
             locationOffset = getContext().getString(R.string.near_the);
@@ -65,6 +94,19 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         }
 
 
+        switch (du) {
+            case "kilometers":
+                depthCon = currentQuake.getDepth();
+                depthCon = depthCon * 1.60934;
+                depthRound = Math.round(depthCon * 100.0) / 100.0;
+                ;
+                depth = String.valueOf(depthRound) + "km";
+                break;
+            case "miles":
+                depth = String.valueOf(currentQuake.getDepth()) + "mi";
+                break;
+        }
+
         TextView primaryLocationView = (TextView) listItemView.findViewById(R.id.location_main);
 
         primaryLocationView.setText(primaryLocation);
@@ -72,6 +114,10 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         TextView locationOffsetView = (TextView) listItemView.findViewById(R.id.location);
 
         locationOffsetView.setText(locationOffset);
+
+        TextView depthView = (TextView) listItemView.findViewById(R.id.depth);
+
+        depthView.setText("Depth - " + depth);
 
         TextView dateText = (TextView) listItemView.findViewById(R.id.date);
         dateText.setText(currentQuake.getTime());
@@ -121,7 +167,7 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
     }
 
-        public int getMagnitudeStrokeColor(double magnitude) {
+    public int getMagnitudeStrokeColor(double magnitude) {
         int magnitudeColorResourceId;
         int magnitudeFloor = (int) floor(magnitude);
         switch (magnitudeFloor) {

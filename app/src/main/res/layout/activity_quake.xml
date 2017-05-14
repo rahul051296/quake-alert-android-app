@@ -7,58 +7,55 @@
     tools:context="com.rahul0596.quakealert.QuakeActivity">
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView"
-        android:divider="?android:divider"
-        >
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="?android:divider">
 
-    </ListView>
+        </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
+        android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        tools:text="No Network Connectvity. :-/"
-        android:id="@+id/empty_view"
-        android:textStyle="bold"
-        android:layout_marginTop="-15dp"
         android:layout_below="@+id/empty_imageview"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="-15dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="No Network Connectvity. :-/" />
+
     <TextView
-        android:layout_width="250dp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
         android:id="@+id/empty_view_desc"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/empty_view"
         android:layout_centerHorizontal="true"
-        android:textColor="?android:textColorSecondary"
-        />
+        android:gravity="center"
+        android:textColor="?android:textColorSecondary" />
+
     <ImageView
+        android:id="@+id/empty_imageview"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:id="@+id/empty_imageview"
         android:layout_centerInParent="true"
-        tools:src="@drawable/no_connection"
-        />
+        tools:src="@drawable/no_connection" />
 
     <ProgressBar
+        android:id="@+id/pbar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pbar"
-        android:layout_marginTop="-8dp"
         android:layout_alignParentTop="true"
-        android:indeterminate="true"/>
+        android:layout_marginTop="-8dp"
+        android:indeterminate="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -66,9 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_public_white_24dp"
         android:layout_margin="@dimen/fab_margin"
-         />
+        android:src="@drawable/ic_public_white_24dp" />
 
 
 </RelativeLayout>

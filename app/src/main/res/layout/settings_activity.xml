@@ -1,8 +1,6 @@
-<fragment
-    android:name="com.rahul0596.quakealert.SettingsActivity$EarthquakePreferenceFragment"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.rahul0596.quakealert.SettingsActivity$EarthquakePreferenceFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rahul0596.quakealert.SettingsActivity">
-</fragment>
+    tools:context="com.rahul0596.quakealert.SettingsActivity" />

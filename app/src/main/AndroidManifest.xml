@@ -42,8 +42,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_menu_item"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rahul0596.quakealert.QuakeActivity" />
@@ -61,17 +60,18 @@
             android:label="Quake Map"
             android:parentActivityName=".QuakeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".About"
+        <activity
+            android:name=".About"
             android:label="About"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".QuakeActivity" />
+            android:parentActivityName=".QuakeActivity"
+            android:screenOrientation="portrait" />
 
-        <service
-            android:name=".MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

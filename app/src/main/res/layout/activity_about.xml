@@ -7,68 +7,67 @@
     tools:context="com.rahul0596.quakealert.About">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quake Alert v2.4.0"
-        android:textColor="?android:textColorSecondary"
-        android:layout_marginTop="24dp"
-        android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:id="@+id/title"
+        android:layout_marginTop="24dp"
+        android:text="Quake Alert v2.5.0"
         android:textAlignment="center"
-        />
+        android:textColor="?android:textColorSecondary"
+        android:textSize="20sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:textAlignment="center"
-        android:textSize="12sp"
         android:text="Powered by USGS"
-        />
+        android:textAlignment="center"
+        android:textSize="12sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"
         android:padding="24dp"
-        android:textAlignment="center"
         android:text="Quake Alert provides you with all the information that you'll need to know about the earthquakes that are recorded around the globe. If you find this app useful, please do rate it and send us your feedback."
-        />
+        android:textAlignment="center" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/thanks"
-        android:padding="8dp"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        android:onClick="mervin"
-        android:textColor="?android:textColorSecondary"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentBottom="true"
-        android:text="@string/graphics"/>
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dev"
-        android:layout_above="@id/thanks"
-        android:textSize="16sp"
-        android:onClick="rahul"
-        android:textColor="?android:textColorSecondary"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:onClick="mervin"
+        android:padding="8dp"
+        android:text="@string/graphics"
         android:textAlignment="center"
-        android:text="@string/dev"/>
+        android:textColor="?android:textColorSecondary"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/dev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/thanks"
+        android:onClick="rahul"
+        android:text="@string/dev"
+        android:textAlignment="center"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="16sp" />
 
 
     <Button
+        android:id="@+id/button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:text="Rate Us"
-        android:textColor="@color/textColor"
-        android:onClick="rateUs"
+        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"/>
-
-
+        android:onClick="rateUs"
+        android:text="Rate Us"
+        android:textColor="@color/textColor" />
 
 
     <Button
@@ -76,9 +75,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button"
-        android:onClick="feedback"
-        android:textColor="@color/textColor"
         android:layout_centerHorizontal="true"
-        android:text="Send Feedback" />
+        android:onClick="feedback"
+        android:text="Send Feedback"
+        android:textColor="@color/textColor" />
 
 </RelativeLayout>

@@ -1,12 +1,18 @@
 <resources>
+
+    <!--UI Strings -->
+
     <string name="app_name">Quake Alert</string>
-    <string name="near_the">Near the</string>
-    <string name="AIzaSyC2jcJmCmrnNey_lo6Ye2mujV7WeCqHy8E">Map API</string>
+    <string name="near_the">Near To</string>
     <string name="title_activity_maps">Map</string>
     <string name="emptyText">No Earthquakes found.</string>
     <string name="emptyDesc">Please check your internet connectivity and try again.</string>
     <string name="noInternet">No Connection.</string>
     <string name="emptyview_desc">There were no earthquakes found at the moment.</string>
+
+    <!--MAP Key-->
+
+    <string name="AIzaSyC2jcJmCmrnNey_lo6Ye2mujV7WeCqHy8E">Map API</string>
     <!-- Settings Menu Item -->
     <string name="settings_menu_item">Settings</string>
     <string name="about_menu_item">About</string>
@@ -18,6 +24,11 @@
     <string name="settings_themes_label">Themes</string>
     <string name="settings_themes_key" translatable="false">themes</string>
     <string name="settings_themes_default" translatable="false">@string/settings_themes_dark_value</string>
+
+    <!-- Strings For Distance Preference-->
+    <string name="settings_distance_label">Distance Unit</string>
+    <string name="settings_distance_key" translatable="false">distance_units</string>
+    <string name="settings_distance_default" translatable="false">@string/settings_distance_km_value</string>
 
     <!-- Strings For Minimum Magnitude Preference-->
     <string name="settings_min_magnitude_label">Minimum Magnitude</string>
@@ -39,11 +50,21 @@
     <string name="settings_location_key" translatable="false">location</string>
     <string name="settings_location_default" translatable="false">@string/settings_order_by_location_world_value</string>
 
+    <!-- Label for dark theme option -->
     <string name="settings_themes_dark_label">Dark</string>
     <string name="settings_themes_dark_value">dark</string>
 
+    <!-- Label for light theme option -->
     <string name="settings_themes_light_label">Light</string>
     <string name="settings_themes_light_value">light</string>
+
+    <!-- Label for Kilometers option -->
+    <string name="settings_distance_km_label">Kilometers</string>
+    <string name="settings_distance_km_value">kilometers</string>
+
+    <!-- Label for Miles option -->
+    <string name="settings_distance_mi_label">Miles</string>
+    <string name="settings_distance_mi_value">miles</string>
 
     <!-- Label for order-by magnitude option -->
     <string name="settings_order_by_magnitude_label">Magnitude</string>
@@ -77,4 +98,6 @@
 
     <string name="dev"><u>Developed by Rahul Prabhakar</u></string>
     <string name="graphics"><u>Graphics by Mervin Monfort</u></string>
+
+
 </resources>
