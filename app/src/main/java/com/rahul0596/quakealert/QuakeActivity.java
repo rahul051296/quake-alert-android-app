@@ -223,7 +223,6 @@ public class QuakeActivity extends AppCompatActivity implements LoaderManager.Lo
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("format", "geojson");
-        uriBuilder.appendQueryParameter("limit", "30");
         uriBuilder.appendQueryParameter("minmagnitude", minMagnitude);
         uriBuilder.appendQueryParameter("orderby", orderBy);
         uriBuilder.appendQueryParameter("latitude", myLat);

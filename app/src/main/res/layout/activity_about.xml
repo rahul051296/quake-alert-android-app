@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
-        android:text="Quake Alert v2.5.0"
+        android:text="Quake Alert v2.5.1"
         android:textAlignment="center"
         android:textColor="?android:textColorSecondary"
         android:textSize="20sp" />

@@ -1,6 +1,7 @@
 package com.rahul0596.quakealert;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -72,19 +73,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.i("ArrayList", String.valueOf(quakeArrayList.size()));
         for (int i = 0; i < quakeArrayList.size(); i++) {
 
-            createMarker(quakeArrayList.get(i).getLatitude(), quakeArrayList.get(i).getLongitude(), quakeArrayList.get(i).getMagnitude(), quakeArrayList.get(i).getLocation());
+            mGoogleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(quakeArrayList.get(i).getLongitude(), quakeArrayList.get(i).getLatitude()))
+                    .snippet(quakeArrayList.get(i).getLocation())
+                    .title("Magnitude - " + String.valueOf(quakeArrayList.get(i).getMagnitude()))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                    ));
+
+            mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    int id = getMarkerIndex(marker.getId());
+
+                    Intent intent = new Intent(MapsActivity.this, QuakeDetailsActivity.class);
+                    intent.putExtra("title", quakeArrayList.get(id).getTitle());
+                    intent.putExtra("mag", quakeArrayList.get(id).getMagnitude());
+                    intent.putExtra("date", quakeArrayList.get(id).getDate());
+                    intent.putExtra("latitude", quakeArrayList.get(id).getLatitude());
+                    intent.putExtra("longitude", quakeArrayList.get(id).getLongitude());
+                    intent.putExtra("depth", quakeArrayList.get(id).getDepth());
+                    intent.putExtra("felt", quakeArrayList.get(id).getFelt());
+                    startActivity(intent);
+                }
+            });
         }
 
     }
-
-    protected Marker createMarker(final double latitude, final double longitude, final double magnitude, String location) {
-        Marker marker = mGoogleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(longitude, latitude))
-                .snippet(location)
-                .title("Magnitude - " + String.valueOf(magnitude))
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
-                ));
-
-        return marker;
+    private int getMarkerIndex(String index){
+        int id = -1;
+        try{
+            id = Integer.parseInt(index.replace("m", ""));
+        }catch(NumberFormatException nfe){
+            Log.e("Error", nfe.getMessage());
+        }
+        return id;
     }
 }
