@@ -96,14 +96,13 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
         switch (du) {
             case "kilometers":
-                depthCon = currentQuake.getDepth();
-                depthCon = depthCon * 1.60934;
-                depthRound = Math.round(depthCon * 100.0) / 100.0;
-                ;
-                depth = String.valueOf(depthRound) + "km";
+                depth = String.valueOf(currentQuake.getDepth()) + "km";
                 break;
             case "miles":
-                depth = String.valueOf(currentQuake.getDepth()) + "mi";
+                depthCon = currentQuake.getDepth();
+                depthCon = depthCon * 0.621371;
+                depthRound = Math.round(depthCon * 100.0) / 100.0;
+                depth = String.valueOf(depthRound + "mi");
                 break;
         }
 

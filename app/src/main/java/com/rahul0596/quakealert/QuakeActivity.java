@@ -42,10 +42,12 @@ public class QuakeActivity extends AppCompatActivity implements LoaderManager.Lo
     String myLat, myLon, myRadius;
     Dialog dialog;
     public static String uri_string;
+    ConnectivityManager connMgr;
+    NetworkInfo networkInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String themes = sharedPrefs.getString(
                 getString(R.string.settings_themes_key),
@@ -96,8 +98,7 @@ public class QuakeActivity extends AppCompatActivity implements LoaderManager.Lo
 
 
         if (googleServicesAvailable()) {
-            ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            checkConnection();
             if (networkInfo != null && networkInfo.isConnected()) {
                 loaderManager.initLoader(0, null, QuakeActivity.this);
             } else {
@@ -113,13 +114,22 @@ public class QuakeActivity extends AppCompatActivity implements LoaderManager.Lo
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(QuakeActivity.this, MapsActivity.class);
-                startActivity(intent);
+                checkConnection();
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    Intent intent = new Intent(QuakeActivity.this, MapsActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(QuakeActivity.this, "No Internet Connection. Please Check your connectivity and try again.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-
+    private void checkConnection()
+    {
+        connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = connMgr.getActiveNetworkInfo();
+    }
     public void dismiss(View view) {
         dialog.dismiss();
     }

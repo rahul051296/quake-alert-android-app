@@ -104,13 +104,13 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
                 getString(R.string.settings_distance_default));
         switch (distUnits) {
             case "kilometers":
-                dep = dep * 1.60934;
-                double depth = Math.round(dep * 100.0) / 100.0;
-                depthView.setText(String.valueOf(depth) + " KM");
+                depthView.setText(String.valueOf(dep) + " KM");
                 primaryLoc = parts[1];
                 break;
             case "miles":
-                depthView.setText(String.valueOf(dep) + " MI");
+                dep = dep * 0.621371;
+                double depth = Math.round(dep * 100.0) / 100.0;
+                depthView.setText(String.valueOf(depth) + " MI");
                 if (primaryLoc.contains(METRIC_MAG)) {
 
                     String[] units = primaryLoc.split(METRIC_MAG);
@@ -191,7 +191,7 @@ public class QuakeDetailsActivity extends AppCompatActivity implements OnMapRead
                 break;
             default:
                 effect = "Catastrophic";
-                message = "You wouldn't be alive to read this.";
+                message = "Never been recorded before.";
                 break;
         }
         effectView.setText("Richter Level - " + effect);
