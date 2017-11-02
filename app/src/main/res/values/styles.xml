@@ -47,7 +47,7 @@
         <item name="actionBarStyle">@style/Theme.MyApp.ActionBar</item>
     </style>
 
-    <style name="Theme.MyApp.ActionBar" parent="style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="Theme.MyApp.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <!-- remove shadow below action bar -->
         <item name="elevation">0dp</item>
     </style>
